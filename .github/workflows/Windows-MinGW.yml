@@ -68,10 +68,12 @@ jobs:
         path: "C:/ProgramData/chocolatey"
         key: cache-deps
 
-    - name: Install MinGW-w64 and sudo
-      uses: crazy-max/ghaction-chocolatey@v1
+    - name: Install msys2
+      uses: msys2/setup-msys2@v2
       with:
-        args: upgrade mingw sudo
+      path-type: minimal
+      release: true
+      update: true
 
     - name: Use ccache
       uses: hendrikmuhs/ccache-action@v1.0.2
