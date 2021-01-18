@@ -19,7 +19,7 @@ env:
 jobs:
   # Checkout apply clang-format and upload artifact
   format:
-    name: "Use clang-format"
+    name: "Format"
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -28,7 +28,7 @@ jobs:
     - name: Use clang-format
       uses: DoozyX/clang-format-lint-action@v0.11
       with:
-        source: '.'
+        source: ${{ github.workspace }}
         clangFormatVersion: 11
         inplace: True
 

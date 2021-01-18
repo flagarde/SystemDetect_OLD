@@ -17,19 +17,26 @@ env:
   artifact: "Linux-Clang.tar.xz"
 
 jobs:
-
+  # Checkout apply clang-format and upload artifact
   format:
-    name: "Use clang-format"
+    name: "Format"
     runs-on: ubuntu-latest
     steps:
-    - name: 🚀 Checkout
+    - name: Checkout
       uses: actions/checkout@v2.3.2
+
     - name: Use clang-format
       uses: DoozyX/clang-format-lint-action@v0.11
       with:
-        source: '.'
+        source: ${{ github.workspace }}
         clangFormatVersion: 11
         inplace: True
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: clang-format
+        path: ${{ github.workspace }}
 
   build:
     needs: format
