@@ -28,7 +28,7 @@ jobs:
     - name: Use clang-format
       uses: DoozyX/clang-format-lint-action@v0.11
       with:
-        source: ${{ github.workspace }}
+        source: "${{ github.workspace }}/"
         clangFormatVersion: 11
         inplace: True
 
