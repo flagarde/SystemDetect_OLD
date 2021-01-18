@@ -14,7 +14,6 @@ env:
   CCACHE_VERSION: 3.7.7
   CC: gcc
   CXX: g++
-  environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
   artifact: "Windows-MinGW.tar.xz"
   BUILDCACHE_VERSION: 0.23.0
   BUILDCACHE_DIR: ${{ github.workspace }}/buildcache_dir
@@ -84,14 +83,6 @@ jobs:
       shell: cmake -P {0}
       run: |
         set(ENV{NINJA_STATUS} "[%f/%t %o/sec] ")
-        if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ env.environment_script }}" STREQUAL "x")
-          file(STRINGS environment_script_output.txt output_lines)
-          foreach(line IN LISTS output_lines)
-            if (line MATCHES "^([a-zA-Z0-9_-]+)=(.*)$")
-              set(ENV{${CMAKE_MATCH_1}} "${CMAKE_MATCH_2}")
-            endif()
-          endforeach()
-        endif()
         include(ProcessorCount)
         ProcessorCount(N)
         execute_process(
