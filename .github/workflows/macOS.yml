@@ -43,37 +43,28 @@ jobs:
     name: "Build"
     runs-on: macos-latest
     steps:
-    - name: ➕ Install cmake
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: clang-format
+
+    - name: Install cmake
       uses: jwlawson/actions-setup-cmake@v1.6
       with:
         cmake-version: '${{env.CMAKE_VERSION}}'
         github-api-token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: ➕ Install Ninja
+    - name: Install Ninja
       uses: seanmiddleditch/gha-setup-ninja@v3
       with:
         version: '${{env.NINJA_VERSION}}'
 
-    - name: 📥 Use ccache
-      uses: hendrikmuhs/ccache-action@v1
+    - name: Use ccache
+      uses: hendrikmuhs/ccache-action@v1.0.2
 
-    - name: 🔧 Configure
-      shell: cmake -P {0}
-      run: |
-        execute_process(
-          COMMAND cmake
-            -S .
-            -B build
-            -D CMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
-            -G Ninja
-            -D CMAKE_MAKE_PROGRAM=ninja
-            -D CMAKE_C_COMPILER_LAUNCHER=ccache
-            -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
-          RESULT_VARIABLE result
-        )
-        if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad exit status")
-        endif()
+    - name: Configure
+      run: cmake -S ${{ github.workspace }} -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G Ninja -D RULE_LAUNCH_COMPILE=ccache -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
+
     - name: 👷 Build
       shell: cmake -P {0}
       run: |

@@ -49,6 +49,23 @@ jobs:
       fail-fast: false
     steps:
 
+    - uses: actions/download-artifact@v2
+      with:
+        name: clang-format
+
+    - name: Install cmake
+      uses: jwlawson/actions-setup-cmake@v1.6
+      with:
+        cmake-version: '${{env.CMAKE_VERSION}}'
+        github-api-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@v3
+      with:
+        version: '${{env.NINJA_VERSION}}'
+
+
+
 
     - name: Cache dependencies
       uses: actions/cache@v2
@@ -60,18 +77,6 @@ jobs:
       uses: crazy-max/ghaction-chocolatey@v1
       with:
         args: install sudo
-
-    - name: ➕ Install cmake
-      uses: jwlawson/actions-setup-cmake@v1.6
-      with:
-        cmake-version: '${{env.CMAKE_VERSION}}'
-        github-api-token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: ➕ Install Ninja
-      uses: seanmiddleditch/gha-setup-ninja@v3
-      with:
-        version: '${{env.NINJA_VERSION}}'
-
 
     - name: Download buildcache
       id: buildcache-download
