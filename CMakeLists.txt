@@ -42,5 +42,6 @@ target_include_directories(SystemDetect
                                      $<INSTALL_INTERFACE:include/SystemDetect>)
                                      
 if(BUILD_TESTS)
+  include(CTest)
   add_subdirectory(tests)
 endif()
