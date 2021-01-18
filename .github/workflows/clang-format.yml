@@ -1,9 +1,9 @@
 name: clang-format
 
-on:
+on: [pull,pull-request]
   # Sequence of patterns matched against refs/tags
-  tags:
-    - v*           # Push events to v1.0, v1.1, and v1.9 tags
+tags:
+  - v*           # Push events to v1.0, v1.1, and v1.9 tags
 
 jobs:
   format:
