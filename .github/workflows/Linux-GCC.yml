@@ -17,12 +17,9 @@ env:
   artifact: "Linux-GCC.tar.xz"
 
 jobs:
-  build:
-    name: "Build"
+  format:
+    name: "Use clang-format"
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-
     steps:
     - name: 🚀 Checkout
       uses: actions/checkout@v2.3.2
@@ -32,6 +29,10 @@ jobs:
         source: '.'
         clangFormatVersion: 11
         inplace: True
+
+  build:
+    needs: format
+    name: "Build"
     - name: ➕ Install cmake
       uses: jwlawson/actions-setup-cmake@v1.5
       with:
