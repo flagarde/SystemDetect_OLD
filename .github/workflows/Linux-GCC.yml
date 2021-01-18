@@ -33,10 +33,10 @@ jobs:
         inplace: True
 
     - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: clang-format
-          path: ${{ github.workspace }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: clang-format
+        path: ${{ github.workspace }}
 
   build:
     needs: format
