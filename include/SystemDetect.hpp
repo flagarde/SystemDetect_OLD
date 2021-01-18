@@ -1,37 +1,37 @@
 #pragma once
 
 namespace SystemDetect {
-static const char *getArchitecture() { return "@ARCH@"; }
-static const char *getBaseArchitecture() { return "@BASEARCH@"; }
-static const char *getSystem() { return "@CMAKE_SYSTEM_NAME@"; }
-static const char *getCCompiler() { return "@CMAKE_C_COMPILER_ID@"; }
-static const char *getCXXCompiler() { return "@CMAKE_CXX_COMPILER_ID@"; }
+static const char *getArchitecture() { return /* clang-format off */"@ARCH@"/* clang-format on */; }
+static const char *getBaseArchitecture() { return /* clang-format off */"@BASEARCH@"/* clang-format on */; }
+static const char *getSystem() { return /* clang-format off */"@CMAKE_SYSTEM_NAME@"/* clang-format on */; }
+static const char *getCCompiler() { return /* clang-format off */"@CMAKE_C_COMPILER_ID@"/* clang-format on */; }
+static const char *getCXXCompiler() { return /* clang-format off */"@CMAKE_CXX_COMPILER_ID@"/* clang-format on */; }
 static const char *getCCompilerVersion() {
-  return "@CMAKE_C_COMPILER_VERSION@";
+  return /* clang-format off */"@CMAKE_C_COMPILER_VERSION@"/* clang-format on */;
 }
 static const char *getCXXCompilerVersion() {
-  return "@CMAKE_CXX_COMPILER_VERSION@";
+  return /* clang-format off */"@CMAKE_CXX_COMPILER_VERSION@"/* clang-format on */;
 }
 static const int getCCompilerMajorVersion() {
-  return @C_COMPILER_VERSION_MAJOR @;
+  return /* clang-format off */@C_COMPILER_VERSION_MAJOR@/* clang-format on */;
 }
 static const int getCCompilerMinorVersion() {
-  return @C_COMPILER_VERSION_MINOR @;
+  return /* clang-format off */@C_COMPILER_VERSION_MINOR@/* clang-format on */;
 }
 static const int getCCompilerPatchVersion() {
-  return @C_COMPILER_VERSION_PATCH @;
+  return /* clang-format off */@C_COMPILER_VERSION_PATCH@/* clang-format on */;
 }
 static const int getCXXCompilerMajorVersion() {
-  return @CXX_COMPILER_VERSION_MAJOR @;
+  return /* clang-format off */@CXX_COMPILER_VERSION_MAJOR@/* clang-format on */;
 }
 static const int getCXXCompilerMinorVersion() {
-  return @CXX_COMPILER_VERSION_MINOR @;
+  return /* clang-format off */@CXX_COMPILER_VERSION_MINOR@/* clang-format on */;
 }
 static const int getCXXCompilerPatchVersion() {
-  return @CXX_COMPILER_VERSION_PATCH @;
+  return /* clang-format off */@CXX_COMPILER_VERSION_PATCH@/* clang-format on */;
 }
-static const bool isBigEndian() { return @ENDIANNESS @; }
-static const bool isLittleEndian() { return !@ENDIANNESS @; }
+static const bool isBigEndian() { return /* clang-format off */@ENDIANNESS@/* clang-format on */; }
+static const bool isLittleEndian() { return !/* clang-format off */@ENDIANNESS@/* clang-format on */; }
 static const char *getEndianness() {
   if (isBigEndian())
     return "BigEndian";
