@@ -20,9 +20,9 @@ elseif(MSVC)
 elseif(CMAKE_CROSSCOMPILING)
   set(ARCH ${CMAKE_C_COMPILER_TARGET})
 else()
-  # Let preprocessor parse archdetect.c and raise an error containing the arch identifier
   enable_language(C)
-  try_run(run_result_unused compile_result_unused ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/detect-arch.cpp COMPILE_OUTPUT_VARIABLE RAWOUTPUT CMAKE_FLAGS CMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES})
+  # Let preprocessor parse archdetect.c and raise an error containing the arch identifier
+  try_run(run_result_unused compile_result_unused ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/detect-arch.c COMPILE_OUTPUT_VARIABLE RAWOUTPUT CMAKE_FLAGS CMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES})
   # Find basearch tag, and extract the arch word into BASEARCH variable
   string(REGEX REPLACE ".*archfound ([a-zA-Z0-9_]+).*" "\\1" ARCH "${RAWOUTPUT}")
   if(NOT ARCH)

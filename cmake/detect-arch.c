@@ -1,4 +1,4 @@
-// archdetect.cpp -- Detect compiler architecture and raise preprocessor error containing a simple arch identifier.
+// archdetect.c -- Detect compiler architecture and raise preprocessor error containing a simple arch identifier.
 // Copyright (C) 2019 Hans Kristian Rosbach
 // Licensed under the Zlib license, see LICENSE.md for details
  

@@ -2,3 +2,6 @@ include(CTest)
 
 add_executable(TestSystemDetect SystemDetect.cpp)
 target_link_libraries(TestSystemDetect PRIVATE SystemDetect)
+
+add_executable(TestSystemDetectMacro SystemDetectMacro.cpp)
+target_link_libraries(TestSystemDetectMacro PRIVATE SystemDetect)
