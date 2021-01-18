@@ -118,7 +118,7 @@ jobs:
     - name: Run tests
       run: ctest -j2 --verbose --output-on-failure
 
-    - name: ➕ Install Strip
+    - name: Install Strip
       run: cmake --install build --prefix instdir --strip
 
 
