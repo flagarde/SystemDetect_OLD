@@ -71,7 +71,7 @@ jobs:
     - name: Install msys2
       uses: msys2/setup-msys2@v2
       with:
-      path-type: minimal
+      path-type: inherit
       release: true
       update: true
 
