@@ -79,19 +79,9 @@ jobs:
     - name: Configure
       run: cmake -S ${{ github.workspace }} -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G Ninja -D RULE_LAUNCH_COMPILE=buildcache -D CMAKE_C_COMPILER_LAUNCHER=buildcache -D CMAKE_CXX_COMPILER_LAUNCHER=buildcache
 
-    - name: 👷 Build
-      shell: cmake -P {0}
-      run: |
-        set(ENV{NINJA_STATUS} "[%f/%t %o/sec] ")
-        include(ProcessorCount)
-        ProcessorCount(N)
-        execute_process(
-          COMMAND cmake --build build --config $ENV{BUILD_TYPE} --parallel ${N}
-          RESULT_VARIABLE result
-        )
-        if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad exit status")
-        endif()
+    - name: Build
+      run: cmake --build build --config ${{ env.BUILD_TYPE }} --parallel 2
+
     - name: ✅ Run tests
       shell: cmake -P {0}
       run: |
