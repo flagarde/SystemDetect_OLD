@@ -54,7 +54,7 @@ jobs:
         args: install sudo
 
     - name: ➕ Install cmake
-      uses: jwlawson/actions-setup-cmake@v1.5
+      uses: jwlawson/actions-setup-cmake@v1.6
       with:
         cmake-version: '${{env.CMAKE_VERSION}}'
         github-api-token: ${{ secrets.GITHUB_TOKEN }}
