@@ -25,11 +25,11 @@ int main() {
   std::cout << "Bingo3" << std::endl;
 #endif
 
-#if IS_BIG_ENDIAN()
+#if IS_BIG_ENDIAN
   std::cout << "Is big endian" << std::endl;
 #endif
 
-#if IS_LITTLE_ENDIAN()
+#if IS_LITTLE_ENDIAN
   std::cout << "Is little endian" << std::endl;
 #endif
 
