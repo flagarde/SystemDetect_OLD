@@ -33,6 +33,7 @@ jobs:
   build:
     needs: format
     name: "Build"
+    runs-on: ubuntu-latest
     steps:
     - name: ➕ Install cmake
       uses: jwlawson/actions-setup-cmake@v1.5

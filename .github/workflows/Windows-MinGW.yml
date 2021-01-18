@@ -36,6 +36,7 @@ jobs:
   build:
     needs: format
     name: "Build"
+    runs-on: windows-latest
     steps:
     - name: Cache dependencies
       uses: actions/cache@v2
