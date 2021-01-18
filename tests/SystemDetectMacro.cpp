@@ -13,15 +13,15 @@ int main() {
   std::cout << "OUI" << std::endl;
 #endif
 
-#if CXX_COMPILER_MAJOR_MINOR_VERSION(10,2)
+#if CXX_COMPILER_MAJOR_VERSION(10) and CXX_COMPILER_MINOR_VERSION(2)
   std::cout << "Bingo" << std::endl;
 #endif
 
-#if CXX_COMPILER_MAJOR_MINOR_VERSION(10,3)
+#if CXX_COMPILER_MAJOR_VERSION(10) and CXX_COMPILER_MINOR_VERSION(3)
   std::cout << "Bingo2" << std::endl;
 #endif
 
-#if CXX_COMPILER_MAJOR_MINOR_VERSION(9,2)
+#if CXX_COMPILER_MAJOR_VERSION(9) and CXX_COMPILER_MINOR_VERSION(2)
   std::cout << "Bingo3" << std::endl;
 #endif
 
