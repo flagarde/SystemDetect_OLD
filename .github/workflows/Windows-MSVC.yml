@@ -14,7 +14,6 @@ env:
   CCACHE_VERSION: 3.7.7
   CC: cl
   CXX: cl
-  environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
   artifact: "Windows-MSVC.tar.xz"
   BUILDCACHE_VERSION: 0.23.0
   BUILDCACHE_DIR: ${{ github.workspace }}/buildcache_dir
@@ -64,6 +63,8 @@ jobs:
       with:
         version: '${{env.NINJA_VERSION}}'
 
+    - name: Setup vsdevenv
+      uses: seanmiddleditch/gha-setup-vsdevenv@master
 
 
 
@@ -108,47 +109,13 @@ jobs:
       run: echo "${{github.workspace}}/buildcache/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
       shell: pwsh
 
-    - name: 🔧 Configure
-      shell: cmake -P {0}
-      run: |
-        if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ env.environment_script }}" STREQUAL "x")
-          execute_process(
-            COMMAND "${{ env.environment_script }}" && set
-            OUTPUT_FILE environment_script_output.txt
-          )
-          file(STRINGS environment_script_output.txt output_lines)
-          foreach(line IN LISTS output_lines)
-            if (line MATCHES "^([a-zA-Z0-9_-]+)=(.*)$")
-              set(ENV{${CMAKE_MATCH_1}} "${CMAKE_MATCH_2}")
-            endif()
-          endforeach()
-        endif()
-        execute_process(
-          COMMAND cmake
-            -S .
-            -B build
-            -D CMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
-            -D RULE_LAUNCH_COMPILE=buildcache
-            -G Ninja
-            -D CMAKE_MAKE_PROGRAM=ninja
-          RESULT_VARIABLE result
-        )
-        if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad exit status")
-        endif()
+    - name: Configure
+      run: cmake -S ${{ github.workspace }} -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G Ninja -D RULE_LAUNCH_COMPILE=buildcache -D CMAKE_C_COMPILER_LAUNCHER=buildcache -D CMAKE_CXX_COMPILER_LAUNCHER=buildcache
 
     - name: 👷 Build
       shell: cmake -P {0}
       run: |
         set(ENV{NINJA_STATUS} "[%f/%t %o/sec] ")
-        if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ env.environment_script }}" STREQUAL "x")
-          file(STRINGS environment_script_output.txt output_lines)
-          foreach(line IN LISTS output_lines)
-            if (line MATCHES "^([a-zA-Z0-9_-]+)=(.*)$")
-              set(ENV{${CMAKE_MATCH_1}} "${CMAKE_MATCH_2}")
-            endif()
-          endforeach()
-        endif()
         include(ProcessorCount)
         ProcessorCount(N)
         execute_process(
