@@ -68,6 +68,17 @@ jobs:
         release: true
         update: true
 
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: "C:/ProgramData/chocolatey"
+        key: cache-deps
+
+    - name: Install sudo
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install sudo
+
     - name: Use ccache
       uses: hendrikmuhs/ccache-action@v1.0.2
 
