@@ -16,5 +16,7 @@ int main()
   std::cout<<"CXX compiler major : "<<SystemDetect::getCXXCompilerMajorVersion()<<std::endl;
   std::cout<<"CXX compiler minor : "<<SystemDetect::getCXXCompilerMinorVersion()<<std::endl;
   std::cout<<"CXX compiler patch : "<<SystemDetect::getCXXCompilerPatchVersion()<<std::endl;
-  return 0;
+  std::cout<<"Endianness : "<<SystemDetect::getEndianness()<<std::endl;
+  std::cout<<"Is bigendian : "<<SystemDetect::isBigEndian()<<std::endl;
+  std::cout<<"Is littleendian : "<<SystemDetect::isLittleEndian()<<std::endl;
 }

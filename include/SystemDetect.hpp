@@ -15,4 +15,11 @@ namespace SystemDetect
   static const int getCXXCompilerMajorVersion(){ return @CXX_COMPILER_VERSION_MAJOR@; }
   static const int getCXXCompilerMinorVersion(){ return @CXX_COMPILER_VERSION_MINOR@; }
   static const int getCXXCompilerPatchVersion(){ return @CXX_COMPILER_VERSION_PATCH@; }
+  static const bool isBigEndian(){ return @ENDIANNESS@; }
+  static const bool isLittleEndian() {return !@ENDIANNESS@; }
+  static const char* getEndianness()
+  {
+      if(isBigEndian()) return "BigEndian";
+      else return "LittleEndian";
+  }
 }

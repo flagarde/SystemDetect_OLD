@@ -30,6 +30,9 @@ else()
   set(CXX_COMPILER_VERSION_PATCH "-1")
 endif()
 
+include(TestBigEndian)
+test_big_endian(ENDIANNESS)
+
 configure_file(include/SystemDetectMacro.hpp "${CMAKE_CURRENT_BINARY_DIR}" @ONLY)
 configure_file(include/SystemDetect.hpp "${CMAKE_CURRENT_BINARY_DIR}" @ONLY)
 
