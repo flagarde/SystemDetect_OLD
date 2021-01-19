@@ -9,7 +9,7 @@ on:
 
 env:
   CMAKE_VERSION: 3.16.x
-  NINJA_VERSION: 1.10.2
+  #NINJA_VERSION: 1.10.2
   BUILD_TYPE: Release
   CCACHE_VERSION: 3.7.7
   CC: gcc
@@ -54,16 +54,16 @@ jobs:
         cmake-version: '${{env.CMAKE_VERSION}}'
         github-api-token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Install Ninja
-      uses: seanmiddleditch/gha-setup-ninja@v3
-      with:
-        version: '${{env.NINJA_VERSION}}'
+    #- name: Install Ninja
+    #  uses: seanmiddleditch/gha-setup-ninja@v3
+    #  with:
+    #    version: '${{env.NINJA_VERSION}}'
 
     - name: Use ccache
       uses: hendrikmuhs/ccache-action@v1.0.2
 
     - name: Configure
-      run: cmake -S ${{ github.workspace }} -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -G Ninja -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
+      run: cmake -S ${{ github.workspace }} -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
       run: cmake --build build --config ${{ env.BUILD_TYPE }} --parallel 2
