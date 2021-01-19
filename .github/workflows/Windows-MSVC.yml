@@ -34,7 +34,7 @@ jobs:
         inplace: True
 
     - name: Install cmakelang
-      run: pip install cmakelang
+      run: pip install git+https://github.com/cheshirekow/cmake_format.git
 
     - name: Use cmake-format
       run: cmake-format -i .
