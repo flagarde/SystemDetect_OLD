@@ -58,6 +58,11 @@ jobs:
       with:
         version: '${{env.NINJA_VERSION}}'
 
+    - name: Install sudo
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install sudo
+
     - name: Use ccache
       uses: hendrikmuhs/ccache-action@v1.0.2
 

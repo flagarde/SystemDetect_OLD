@@ -65,17 +65,6 @@ jobs:
     - name: Setup vsdevenv
       uses: seanmiddleditch/gha-setup-vsdevenv@master
 
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: "C:/ProgramData/chocolatey/bin/Sudo.exe"
-        key: cache-deps
-
-    - name: Install sudo
-      uses: crazy-max/ghaction-chocolatey@v1
-      with:
-        args: install sudo
-
     - name: Download buildcache
       id: buildcache-download
       shell: cmake -P {0}
