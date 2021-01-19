@@ -34,7 +34,10 @@ jobs:
         inplace: True
 
     - name: Install cmakelang
-      run: pip install git+https://github.com/cheshirekow/cmake_format.git
+      uses: actions/setup-python@v2
+      uses: BSFishy/pip-action@v1
+      with:
+        packages: cmakelang
 
     - name: Use cmake-format
       run: cmake-format -i .
