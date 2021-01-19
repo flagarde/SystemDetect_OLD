@@ -33,6 +33,12 @@ jobs:
         clangFormatVersion: 11
         inplace: True
 
+    - name: Install cmakelang
+      run: pip install cmakelang
+
+    - name: Use cmake-format
+      run: cmake-format -i .
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
