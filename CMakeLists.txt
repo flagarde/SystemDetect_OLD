@@ -37,10 +37,10 @@ configure_file(include/SystemDetectMacro.hpp "${CMAKE_CURRENT_BINARY_DIR}" @ONLY
 configure_file(include/SystemDetect.hpp "${CMAKE_CURRENT_BINARY_DIR}" @ONLY)
 
 add_library(SystemDetect INTERFACE)
-target_include_directories(SystemDetect 
+target_include_directories(SystemDetect
                            INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
                                      $<INSTALL_INTERFACE:include/SystemDetect>)
-                                     
+
 if(BUILD_TESTS)
   include(CTest)
   add_subdirectory(tests)

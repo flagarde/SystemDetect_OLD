@@ -9,7 +9,7 @@ on:
 
 env:
   CMAKE_VERSION: 3.16.x
-  #NINJA_VERSION: 1.10.2
+  NINJA_VERSION: 1.10.2
   BUILD_TYPE: Release
   CCACHE_VERSION: 3.7.7
   CC: gcc
@@ -56,10 +56,10 @@ jobs:
         cmake-version: '${{env.CMAKE_VERSION}}'
         github-api-token: ${{ secrets.GITHUB_TOKEN }}
 
-    #- name: Install Ninja
-    #  uses: seanmiddleditch/gha-setup-ninja@v3
-    #  with:
-    #    version: '${{env.NINJA_VERSION}}'
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@v3
+      with:
+        version: '${{env.NINJA_VERSION}}'
 
     - name: Install msys2
       uses: msys2/setup-msys2@v2
@@ -83,12 +83,13 @@ jobs:
       uses: hendrikmuhs/ccache-action@v1.0.2
 
     - name: Configure
-      run: cmake -S ${{ github.workspace }} -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D CMAKE_C_COMPILER_LAUNCHER=buildcache -D CMAKE_CXX_COMPILER_LAUNCHER=buildcache
+      run: cmake -S ${{ github.workspace }} -G Ninja  -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D CMAKE_C_COMPILER_LAUNCHER=buildcache -D CMAKE_CXX_COMPILER_LAUNCHER=buildcache
 
     - name: Build
       run: cmake --build build --config ${{ env.BUILD_TYPE }} --parallel 2
 
     - name: Run tests
+      working-directory: ${{ github.workspace }}/build
       run: ctest -C ${{ env.BUILD_TYPE }} -j2 --verbose --output-on-failure
 
     - name: Install Strip
