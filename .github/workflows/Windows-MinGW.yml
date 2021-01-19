@@ -65,6 +65,11 @@ jobs:
         release: true
         update: true
 
+    - name: Install sudo
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install sudo
+
     - name: Use ccache
       uses: hendrikmuhs/ccache-action@v1.0.2
 
