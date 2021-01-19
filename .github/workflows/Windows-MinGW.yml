@@ -11,12 +11,9 @@ env:
   CMAKE_VERSION: 3.16.x
   NINJA_VERSION: 1.10.2
   BUILD_TYPE: Release
-  CCACHE_VERSION: 3.7.7
   CC: gcc
   CXX: g++
   artifact: "Windows-MinGW.tar.xz"
-  BUILDCACHE_VERSION: 0.23.0
-  BUILDCACHE_DIR: ${{ github.workspace }}/buildcache_dir
 
 jobs:
   # Checkout apply clang-format and upload artifact
