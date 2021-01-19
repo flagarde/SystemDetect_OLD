@@ -40,7 +40,7 @@ jobs:
         packages: cmakelang pyyaml jinja2
 
     - name: Use cmake-format
-      run: cmake-format -i ./*/*.cmake ./*/CMakeLists.txt
+      run: find . \( -name '*.cmake' -o -name 'CMakeLists.txt' \) -exec cmake-format -i {} \;
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
