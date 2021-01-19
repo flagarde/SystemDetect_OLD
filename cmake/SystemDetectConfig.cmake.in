@@ -1,0 +1,10 @@
+@PACKAGE_INIT@
+add_library(SystemDetect INTERFACE)
+include("${CMAKE_CURRENT_LIST_DIR}/detect-arch.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/detect-compiler.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/detect-endianness.cmake")
+configure_file("${CMAKE_CURRENT_LIST_DIR}/SystemDetectMacro.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/SystemDetect/SystemDetectMacro.hpp" @ONLY)
+configure_file("${CMAKE_CURRENT_LIST_DIR}/SystemDetect.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/SystemDetect/SystemDetect.hpp" @ONLY)
+target_include_directories(SystemDetect INTERFACE "${PACKAGE_PREFIX_DIR}/include/" INTERFACE "${CMAKE_CURRENT_BINARY_DIR}/SystemDetect")
+add_library(SystemDetect::SystemDetect ALIAS SystemDetect)
+check_required_components(SystemDetect)
