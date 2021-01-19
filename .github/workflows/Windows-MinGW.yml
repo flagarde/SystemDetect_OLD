@@ -70,6 +70,7 @@ jobs:
       run: pacman --noconfirm -S ccache
 
     - name: Configure
+      shell: msys2 {0}
       run: cmake -S ${{ github.workspace }} -G Ninja  -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
