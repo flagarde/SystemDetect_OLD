@@ -40,7 +40,7 @@ jobs:
         packages: cmakelang
 
     - name: Use cmake-format
-      run: cmake-format -i .
+      run: cmake-format -i ./*/*.cmake ./*/CMakeLists.txt
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
