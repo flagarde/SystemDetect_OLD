@@ -1,10 +1,3 @@
-include(detect-arch)
-include(detect-compiler)
-include(detect-endianness)
-
-configure_file("${CMAKE_CURRENT_LIST_DIR}/../cmake/SystemDetectMacro.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/../SystemDetect/SystemDetectMacro.hpp" @ONLY)
-configure_file("${CMAKE_CURRENT_LIST_DIR}/../cmake/SystemDetect.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/../SystemDetect/SystemDetect.hpp" @ONLY)
-
 add_executable(TestSystemDetect SystemDetect.cpp)
 target_link_libraries(TestSystemDetect PRIVATE SystemDetect::SystemDetect)
 
