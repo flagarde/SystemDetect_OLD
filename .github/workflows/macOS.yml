@@ -75,11 +75,6 @@ jobs:
     - name: Install Strip
       run: cmake --install build --prefix instdir --strip
 
-
-    - name: 📦 Pack
-      working-directory: instdir
-      run: cmake -E tar cJfv ../${{ env.artifact }} .
-
   release:
     name: "Release"
     if: contains(github.ref, 'tags/v')

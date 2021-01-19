@@ -68,19 +68,9 @@ jobs:
         release: true
         update: true
 
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: "C:/ProgramData/chocolatey/bin/Sudo.exe"
-        key: cache-deps
-
-    - name: Install sudo
-      uses: crazy-max/ghaction-chocolatey@v1
-      with:
-        args: install sudo
-
-    - name: Use ccache
-      uses: hendrikmuhs/ccache-action@v1.0.2
+    - name: Install ccache
+      shell: msys2 {0}
+      runs: pacman --noconfirm -S ccache
 
     - name: Configure
       run: cmake -S ${{ github.workspace }} -G Ninja  -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D CMAKE_C_COMPILER_LAUNCHER=buildcache -D CMAKE_CXX_COMPILER_LAUNCHER=buildcache
@@ -94,10 +84,6 @@ jobs:
 
     - name: Install Strip
       run: cmake --install build --prefix instdir --strip
-
-    - name: 📦 Pack
-      working-directory: instdir
-      run: cmake -E tar cJfv ../${{ env.artifact }} .
 
   release:
     name: "Release"
@@ -117,9 +103,13 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: 🔗 Store Release url
+    - name: Store Release url
       run: |
         echo "${{ steps.create_release.outputs.upload_url }}" > ./upload_url
+
+    - name: Pack
+      working-directory: instdir
+      run: cmake -E tar cJfv ../${{ env.artifact }} .
 
     - name: Upload
       uses: actions/upload-artifact@v2

@@ -75,10 +75,6 @@ jobs:
     - name: Install Strip
       run: cmake --install build --prefix instdir --strip
 
-    - name: 📦 Pack
-      working-directory: instdir
-      run: cmake -E tar cJfv ../${{ env.artifact }} .
-
   release:
     name: "Release"
     if: contains(github.ref, 'tags/v')
@@ -97,16 +93,19 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: 🔗 Store Release url
+    - name: Store Release url
       run: |
         echo "${{ steps.create_release.outputs.upload_url }}" > ./upload_url
+
+    - name: Pack
+      working-directory: instdir
+      run: cmake -E tar cJfv ../${{ env.artifact }} .
 
     - name: Upload
       uses: actions/upload-artifact@v2
       with:
         path: instdir
         name: ${{ env.artifact }}
-
   publish:
     name: "Publish"
     if: contains(github.ref, 'tags/v')
