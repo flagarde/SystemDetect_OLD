@@ -82,12 +82,6 @@ jobs:
       working-directory: instdir
       run: cmake -E tar cJfv ../${{ env.artifact }} .
 
-    - name: Upload
-      uses: actions/upload-artifact@v1
-      with:
-        path: instdir
-        name: ${{ env.artifact }}
-
   release:
     name: "Release"
     if: contains(github.ref, 'tags/v')
@@ -109,10 +103,12 @@ jobs:
     - name: 🔗 Store Release url
       run: |
         echo "${{ steps.create_release.outputs.upload_url }}" > ./upload_url
-    - uses: actions/upload-artifact@v1
+
+    - name: Upload
+      uses: actions/upload-artifact@v2
       with:
-        path: ./upload_url
-        name: upload_url
+        path: instdir
+        name: ${{ env.artifact }}
 
 
   publish:
