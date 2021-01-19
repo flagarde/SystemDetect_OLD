@@ -33,8 +33,10 @@ jobs:
         clangFormatVersion: 11
         inplace: True
 
-    - name: Install cmakelang
+    - name: Setup Python
       uses: actions/setup-python@v2
+
+    - name: Install cmakelang
       uses: BSFishy/pip-action@v1
       with:
         packages: cmakelang
