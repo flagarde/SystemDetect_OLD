@@ -69,7 +69,7 @@ jobs:
     - name: Cache dependencies
       uses: actions/cache@v2
       with:
-        path: "C:\ProgramData\chocolatey\bin\Sudo.exe"
+        path: "C:\ProgramData\chocolatey\bin"
         key: cache-deps
 
     - name: Install sudo
