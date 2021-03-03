@@ -9,5 +9,5 @@ message(STATUS "${CMAKE_BINARY_DIR}")
 add_executable(Test Test.cpp)
 target_link_libraries(Test PRIVATE SystemDetect::SystemDetect)
 install(TARGETS Test RUNTIME DESTINATION "bin/tests")
-
+target_compile_definitions(Test PUBLIC TEST_ARCH=${TEST_ARCH} PUBLIC TEST_SYSTEM=${TEST_SYSTEM} PUBLIC TEST_COMPILER=${TEST_COMPILER})
 add_test(NAME Test COMMAND Test )
