@@ -5,6 +5,3 @@ add_executable(TestSystemDetectMacro SystemDetectMacro.cpp)
 target_link_libraries(TestSystemDetectMacro PRIVATE SystemDetect::SystemDetect)
 
 install(TARGETS TestSystemDetect TestSystemDetectMacro RUNTIME DESTINATION bin)
-
-add_test(NAME TestSystemDetect COMMAND TestSystemDetect)
-add_test(NAME TestSystemDetectMacro COMMAND TestSystemDetectMacro)

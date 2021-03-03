@@ -4,7 +4,8 @@ project(SystemDetect VERSION "0.9.0.0" DESCRIPTION "Detect system architecture e
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-option(BUILD_EXAMPLE "Build the examples" ON)
+option(BUILD_EXAMPLES "Build the examples" ON)
+option(BUILD_TESTS "Build the tests" ON)
 
 include(detect-arch)
 include(detect-compiler)
@@ -24,7 +25,11 @@ write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/SystemDetectConfig
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemDetectConfig.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/SystemDetectConfig.cmake" INSTALL_DESTINATION "lib/cmake/SystemDetect"  PATH_VARS CMAKE_INSTALL_PREFIX)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/SystemDetectConfig.cmake" "${CMAKE_CURRENT_BINARY_DIR}/SystemDetectConfigVersion.cmake"  "${CMAKE_CURRENT_SOURCE_DIR}/cmake/detect-arch.cmake" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/detect-compiler.cmake" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/detect-endianness.cmake" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/detect-arch.c" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemDetectMacro.hpp.in" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/SystemDetect.hpp.in" DESTINATION "lib/cmake/SystemDetect/")
 
-
-if(BUILD_EXAMPLE)
+if(BUILD_EXAMPLES)
   add_subdirectory(examples)
+endif()
+
+if(BUILD_TESTS)
+  include(CTest)
+  add_subdirectory(tests)
 endif()
