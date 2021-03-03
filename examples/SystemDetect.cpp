@@ -3,6 +3,8 @@
 #include <iostream>
 
 int main() {
+  std::cout << "System : " << SystemDetect::getSystem()
+  << std::endl;
   std::cout << "Architecture : " << SystemDetect::getArchitecture()
             << std::endl;
   std::cout << "Base architecture : " << SystemDetect::getBaseArchitecture()

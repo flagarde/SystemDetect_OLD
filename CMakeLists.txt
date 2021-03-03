@@ -7,6 +7,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 option(BUILD_EXAMPLES "Build the examples" ON)
 option(BUILD_TESTS "Build the tests" ON)
 
+message(STATUS "Host OS : ${CMAKE_HOST_SYSTEM_NAME}")
+message(STATUS "Target OS : ${CMAKE_SYSTEM_NAME}")
 include(detect-arch)
 include(detect-compiler)
 include(detect-endianness)
