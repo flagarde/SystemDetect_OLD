@@ -16,6 +16,9 @@ env:
   artifact: "Windows-MSVC.tar.xz"
   BUILDCACHE_VERSION: 0.23.0
   BUILDCACHE_DIR: ${{ github.workspace }}/buildcache_dir
+  TEST_SYSTEM: "Windows"
+  TEST_ARCH: "x86_64"
+  TEST_COMPILER: "MSVC"
 
 jobs:
   # Checkout apply clang-format and upload artifact
@@ -109,7 +112,7 @@ jobs:
       shell: pwsh
 
     - name: Configure
-      run: cmake -S ${{ github.workspace }} -G Ninja -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D CMAKE_C_COMPILER_LAUNCHER=buildcache -D CMAKE_CXX_COMPILER_LAUNCHER=buildcache
+      run: cmake -S ${{ github.workspace }} -G Ninja -B build -D CMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -D CMAKE_C_COMPILER_LAUNCHER=buildcache -D CMAKE_CXX_COMPILER_LAUNCHER=buildcache -DTEST_SYSTEM=${{ env.TEST_SYSTEM }} -DTEST_ARCH=${{ env.TEST_ARCH }} -DTEST_COMPILER=${{ env.TEST_COMPILER }}
 
     - name: Build
       run: cmake --build build --config ${{ env.BUILD_TYPE }} --parallel 2

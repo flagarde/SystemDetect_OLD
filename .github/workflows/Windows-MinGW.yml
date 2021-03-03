@@ -14,6 +14,9 @@ env:
   CC: gcc
   CXX: g++
   artifact: "Windows-MinGW.tar.xz"
+  TEST_SYSTEM: "Windows"
+  TEST_ARCH: "x86_64"
+  TEST_COMPILER: "MinGW"
 
 jobs:
   # Checkout apply clang-format and upload artifact

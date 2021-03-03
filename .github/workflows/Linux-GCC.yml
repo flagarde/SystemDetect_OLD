@@ -14,6 +14,9 @@ env:
   CC: gcc
   CXX: g++
   artifact: "Linux-GCC.tar.xz"
+  TEST_SYSTEM: "Linux"
+  TEST_ARCH: "x86_64"
+  TEST_COMPILER: "GNU"
 
 jobs:
   # Checkout apply clang-format and upload artifact
