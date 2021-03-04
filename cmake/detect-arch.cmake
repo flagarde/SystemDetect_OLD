@@ -4,6 +4,17 @@
 
 set(ARCHDETECT_FOUND TRUE)
 
+macro(arch-detect)
+  enable_language(C)
+  # Let preprocessor parse archdetect.c and raise an error containing the arch identifier
+  try_run(run_result_unused compile_result_unused ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_LIST_DIR}/detect-arch.c" COMPILE_OUTPUT_VARIABLE RAWOUTPUT CMAKE_FLAGS CMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES})
+  # Find basearch tag, and extract the arch word into BASEARCH variable
+  string(REGEX REPLACE ".*archfound ([a-zA-Z0-9_]+).*" "\\1" ARCH "${RAWOUTPUT}")
+  if(NOT ARCH)
+    set(ARCH unknown)
+  endif()
+endmacro()
+
 if(CMAKE_OSX_ARCHITECTURES)
   # If multiple architectures are requested (universal build), pick only the first
   list(GET CMAKE_OSX_ARCHITECTURES 0 ARCH)
@@ -17,26 +28,12 @@ elseif(MSVC)
   elseif ("${MSVC_C_ARCHITECTURE_ID}" STREQUAL "ARM64")
     set(ARCH "aarch64")
   else()
-    enable_language(C)
-    # Let preprocessor parse archdetect.c and raise an error containing the arch identifier
-    try_run(run_result_unused compile_result_unused ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_LIST_DIR}/detect-arch.c" COMPILE_OUTPUT_VARIABLE RAWOUTPUT CMAKE_FLAGS CMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES})
-    # Find basearch tag, and extract the arch word into BASEARCH variable
-    string(REGEX REPLACE ".*archfound ([a-zA-Z0-9_]+).*" "\\1" ARCH "${RAWOUTPUT}")
-    if(NOT ARCH)
-      set(ARCH unknown)
-    endif()
+    arch-detect()
   endif()
 elseif(CMAKE_CROSSCOMPILING)
   set(ARCH ${CMAKE_C_COMPILER_TARGET})
 else()
-  enable_language(C)
-  # Let preprocessor parse archdetect.c and raise an error containing the arch identifier
-  try_run(run_result_unused compile_result_unused ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_LIST_DIR}/detect-arch.c" COMPILE_OUTPUT_VARIABLE RAWOUTPUT CMAKE_FLAGS CMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES})
-  # Find basearch tag, and extract the arch word into BASEARCH variable
-  string(REGEX REPLACE ".*archfound ([a-zA-Z0-9_]+).*" "\\1" ARCH "${RAWOUTPUT}")
-  if(NOT ARCH)
-    set(ARCH unknown)
-  endif()
+  arch-detect()
 endif()
 
 # Make sure we have ARCH set
