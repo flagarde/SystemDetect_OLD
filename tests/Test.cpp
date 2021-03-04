@@ -1,4 +1,5 @@
 #include "SystemDetectMacro.hpp"
+#include "SystemDetect.hpp"
 
 #include <iostream>
 #include <string>
