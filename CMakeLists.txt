@@ -9,6 +9,7 @@ option(BUILD_TESTS "Build the tests" ON)
 
 message(STATUS "Host OS : ${CMAKE_HOST_SYSTEM_NAME}")
 message(STATUS "Target OS : ${CMAKE_SYSTEM_NAME}")
+message(STATUS "Compiler C: ${CMAKE_C_COMPILER_ID}")
 include(detect-arch)
 include(detect-compiler)
 include(detect-endianness)
