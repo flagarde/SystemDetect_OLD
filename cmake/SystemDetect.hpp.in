@@ -11,10 +11,10 @@ static const char *getSystem() {
   return /* clang-format off */"@CMAKE_SYSTEM_NAME@" /* clang-format on */;
 }
 static const char *getCCompiler() {
-  return /* clang-format off */"@CMAKE_C_COMPILER_ID@" /* clang-format on */;
+  return /* clang-format off */"@SYSTEMDETECT_C_COMPILER_ID@" /* clang-format on */;
 }
 static const char *getCXXCompiler() {
-  return /* clang-format off */"@CMAKE_CXX_COMPILER_ID@" /* clang-format on */;
+  return /* clang-format off */"@SYSTEMDETECT_CXX_COMPILER_ID@" /* clang-format on */;
 }
 static const char *getCCompilerVersion() {
   return /* clang-format off */"@CMAKE_C_COMPILER_VERSION@" /* clang-format on */;
