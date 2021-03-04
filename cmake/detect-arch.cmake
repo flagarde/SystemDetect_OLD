@@ -4,7 +4,7 @@
 
 set(ARCHDETECT_FOUND TRUE)
 
-macro(arch-detect)
+macro(archdetect)
   enable_language(C)
   # Let preprocessor parse archdetect.c and raise an error containing the arch identifier
   try_run(run_result_unused compile_result_unused ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_LIST_DIR}/detect-arch.c" COMPILE_OUTPUT_VARIABLE RAWOUTPUT CMAKE_FLAGS CMAKE_OSX_ARCHITECTURES=${CMAKE_OSX_ARCHITECTURES})
@@ -28,12 +28,12 @@ elseif(MSVC)
   elseif ("${MSVC_C_ARCHITECTURE_ID}" STREQUAL "ARM64")
     set(ARCH "aarch64")
   else()
-    arch-detect()
+    archdetect()
   endif()
 elseif(CMAKE_CROSSCOMPILING)
   set(ARCH ${CMAKE_C_COMPILER_TARGET})
 else()
-  arch-detect()
+  archdetect()
 endif()
 
 # Make sure we have ARCH set
