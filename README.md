@@ -2,7 +2,7 @@
 
 Detect Architecture, OS, Compiler etc with CMake.
 
-# Build
+## Build
 
 |                   | Linux Clang| Linux GCC       | macOS Clang       | Windows MSVC      | Windows MinGW64      |
 |-------------------|-------------------|-------------------|-------------------|-------------------|----------------------|
