@@ -14,7 +14,7 @@ env:
   CC: clang
   CXX: clang++
   artifact: "macOS.tar.xz"
-  TEST_SYSTEM: "MacOS"
+  TEST_SYSTEM: "Darwin"
   TEST_ARCH: "x86_64"
   TEST_COMPILER: "Clang"
 

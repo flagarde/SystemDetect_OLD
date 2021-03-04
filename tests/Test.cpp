@@ -49,9 +49,9 @@ std::cout << "Is littleendian : " << SystemDetect::isLittleEndian()<< std::endl;
   #else
     #error Wrong system
   #endif
-#elif defined(MacOS)
-  #if SYSTEM_IS(MacOS)
-    std::cout << "I guessed the right system : MacOS" << std::endl;
+#elif defined(Darwin)
+  #if SYSTEM_IS(Darwin)
+    std::cout << "I guessed the right system : Darwin" << std::endl;
   #else
     #error Wrong system
   #endif
