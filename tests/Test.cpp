@@ -6,7 +6,7 @@
 int main() {
 
 #if defined(Clang)
-  #if TEST_COMPILER(Clang)
+  #if TEST_COMPILER(Clang2)
     std::cout << "I guessed the right architecture : "+std::string(Clang) << std::endl;
   #else
     #error Wrong architecture
