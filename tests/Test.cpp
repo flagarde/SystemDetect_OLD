@@ -27,19 +27,19 @@ std::cout << "Is littleendian : " << SystemDetect::isLittleEndian()<< std::endl;
   #if C_COMPILER_IS(Clang)
   std::cout << "I guessed the right architecture : Clang" << std::endl;
   #else
-    #error Wrong architecture
+    #error Wrong compiler
   #endif
 #elif defined(GNU)
   #if C_COMPILER_IS(GNU)
     std::cout << "I guessed the right architecture : GNU" << std::endl;
   #else
-    #error Wrong architecture
+    #error Wrong compiler
   #endif
 #elif defined(MSVC)
   #if C_COMPILER_IS(MSVC)
     std::cout << "I guessed the right architecture : MSVC" << std::endl;
   #else
-    #error Wrong architecture
+    #error Wrong compiler
   #endif
 #endif
 
@@ -67,13 +67,13 @@ std::cout << "Is littleendian : " << SystemDetect::isLittleEndian()<< std::endl;
   #if ARCHITECTURE_IS(x86_64)
     std::cout << "I guessed the right architectures : x86_64" << std::endl;
   #else
-    #error Wrong system
+    #error Wrong arch
   #endif
 #elif defined(x86)
   #if ARCHITECTURE_IS(x86)
     std::cout << "I guessed the right architectures : x86" << std::endl;
   #else
-    #error Wrong system
+    #error Wrong arch
   #endif
 #endif
 
