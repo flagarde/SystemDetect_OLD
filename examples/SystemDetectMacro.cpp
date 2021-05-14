@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-int main() {
+int main()
+{
 #if ARCHITECTURE_IS(x86_64)
   std::cout << "x86_64" << std::endl;
 #else
